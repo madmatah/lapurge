@@ -36,10 +36,11 @@ def teardown_capture_stderr():
 @with_setup(setup_tempdir, teardown_tempdir)
 def test_frompath():
     global tempdir
-    today = date.today()
+    tstamp = int(datetime(2013, 3, 12, 2, 0, 0).strftime("%s"))
     (fh1, path1) = mkstemp(dir=tempdir)
+    os.utime(path1, (tstamp, tstamp))
     b1 = Backup.from_path(path1)
-    assert(b1.mtime.date() == today)
+    assert(b1.mtime.date() == date(2013, 3, 12))
     assert(b1.filepath == path1)
 
 
