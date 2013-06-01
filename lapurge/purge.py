@@ -1,0 +1,51 @@
+
+import os
+import sys
+from types import BackupCollection, Backup
+
+
+def run(args):
+    backups = get_backup_collection(args.backup_dir)
+    days = backups.days()
+    days_to_keep = daily_backup_days(days, args.days_retention)
+    days_to_keep += weekly_backup_days(days, args.dow, args.weeks_retention)
+    days_to_keep += monthly_backup_days(days, args.dom, args.months_retention)
+    if days_to_keep or args.force:
+        backups_to_remove = backups.except_days(set(days_to_keep))
+        backups_to_remove.remove_all(args.noop)
+        return 0
+    else:
+        sys.stderr.write("""
+WARNING : With the specified retention rules, all the files in the specified
+directory will be deleted. If you only specified -m and / or -w, it means that
+there is no file in the directory that match your retention rules. Please look
+at --day-of-week or --day-of-month options.
+
+If you really know what you are doing, you can use option --force to
+remove all your backup files according to your retention rules.
+""")
+        return 1
+
+
+def get_backup_collection(backup_dir):
+    daily_backups = BackupCollection()
+    for file in os.listdir(backup_dir):
+        fpath = os.path.join(backup_dir, file)
+        if not os.path.islink(fpath) and os.path.isfile(fpath):
+            backup = Backup.from_path(fpath)
+            daily_backups.add(backup)
+    return daily_backups
+
+
+def daily_backup_days(days, retention):
+    return days[:retention]
+
+
+def weekly_backup_days(days, dow, retention):
+    weekly_days = [day for day in days if day.isoweekday() == dow]
+    return weekly_days[:retention]
+
+
+def monthly_backup_days(days, dom, retention):
+    monthly_days = [day for day in days if day.day == dom]
+    return monthly_days[:retention]
