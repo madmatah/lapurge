@@ -1,6 +1,5 @@
 import sys
-import arguments
-import purge
+from . import arguments, purge
 
 
 def main():
@@ -11,6 +10,6 @@ def main():
     except KeyboardInterrupt:
         sys.stderr.write('KeyboardInterrupt\nexiting ...\n')
         sys.exit(0)
-    except Exception, info:
+    except Exception as info:
         sys.stderr.write("ERROR : %s\n" % info)
         sys.exit(1)

@@ -1,7 +1,7 @@
-import argparse
 import sys
+import argparse
 
-from version import __version__
+from .version import __version__
 
 
 def check_negative(value):

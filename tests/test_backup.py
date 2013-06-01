@@ -2,10 +2,14 @@ from lapurge.types import Backup
 from datetime import datetime, date
 from nose.tools import with_setup
 from tempfile import mkstemp, mkdtemp
-from StringIO import StringIO
 import shutil
 import os
 import sys
+# To support python 2.7 and 3.x
+try:
+    from StringIO import StringIO
+except:
+    from io import StringIO
 
 tempdir = None
 saved_stderr = None

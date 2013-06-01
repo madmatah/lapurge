@@ -1,7 +1,7 @@
 
 import os
 import sys
-from types import BackupCollection, Backup
+from .types import BackupCollection, Backup
 
 
 def run(args):

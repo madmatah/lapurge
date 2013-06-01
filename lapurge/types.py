@@ -14,13 +14,13 @@ class Backup:
 
     def remove(self, simulate=True):
         if (simulate):
-            print "REMOVE " + str(self)
+            print ("REMOVE " + str(self))
             return True
         else:
             try:
                 os.remove(self.filepath)
                 return True
-            except OSError, info:
+            except OSError as info:
                 sys.stderr.write("ERROR : %s\n" % info)
                 return False
 
