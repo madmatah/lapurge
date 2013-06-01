@@ -11,6 +11,12 @@
 
 ## Installation
 
+```
+sudo python setup.py install
+```
+
+(I will submit the project to PiPy soon)
+
 
 ## Usage
 
