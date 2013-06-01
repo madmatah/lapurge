@@ -15,7 +15,7 @@
 sudo python setup.py install
 ```
 
-(I will submit the project to PiPy soon)
+(I will submit the project to PyPI soon)
 
 
 ## Usage
