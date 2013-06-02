@@ -80,10 +80,10 @@ class BackupCollection:
         else:
             self.backups[date].add(backup)
 
-    def days(self):
+    def days(self, recent_first=True):
         """ returns the list of days having backups, ordered by modification
-        date (most recent backups first) """
-        return sorted(self.backups.keys(), reverse=True)
+        date (most recent backups first by default) """
+        return sorted(self.backups.keys(), reverse=recent_first)
 
     def except_days(self, days):
         """ returns a copy of the BackupCollection without the specified days """
@@ -93,7 +93,7 @@ class BackupCollection:
     def remove_all(self, simulate=True):
         """ remove every backups of this collection """
         errors = False
-        for days in self.backups:
+        for days in self.days(recent_first=False):
             for backup in self.backups[days]:
                 if not backup.remove(simulate):
                     errors = True
