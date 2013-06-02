@@ -5,6 +5,22 @@
 
 [![Build Status](https://secure.travis-ci.org/madmatah/lapurge.png)](http://travis-ci.org/madmatah/lapurge)
 
+## Why this tool ?
+
+**Short answer :** [Unix Philosophy : «Write programs that do one thing and do it well»](http://en.wikipedia.org/wiki/Unix_philosophy)
+
+**The long story :**
+
+Usually, backup retention management is handled by the backup solution we use. But :
+- some backup tools do not have this feature
+- sometimes, we have to make our own backup script for particular cases.
+
+In these cases, we have to manage the retention of the backup files on our own.
+And honestly, I've seen too many ugly and untested shell scripts in production to do this job !
+
+
+So I decided to create this tool. I hope it will follow the [Unix Philosophy (Write programs that do one thing and do it well)](http://en.wikipedia.org/wiki/Unix_philosophy).
+
 
 ## Requirements
 
