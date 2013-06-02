@@ -24,15 +24,15 @@ import sys
 from .types import BackupCollection, Backup
 
 
-def run(args):
-    backups = get_backup_collection(args.backup_dir)
+def run(config):
+    backups = get_backup_collection(config.backup_dir)
     days = backups.days()
-    days_to_keep = daily_backup_days(days, args.days_retention)
-    days_to_keep += weekly_backup_days(days, args.dow, args.weeks_retention)
-    days_to_keep += monthly_backup_days(days, args.dom, args.months_retention)
-    if days_to_keep or args.force:
+    if not days:
+        return 0
+    days_to_keep = get_days_to_keep(days, config)
+    if days_to_keep or config.force:
         backups_to_remove = backups.except_days(set(days_to_keep))
-        backups_to_remove.remove_all(args.noop)
+        backups_to_remove.remove_all(config.noop)
         return 0
     else:
         sys.stderr.write("""
@@ -55,6 +55,15 @@ def get_backup_collection(backup_dir):
             backup = Backup.from_path(fpath)
             daily_backups.add(backup)
     return daily_backups
+
+
+def get_days_to_keep(days, config):
+    days_to_keep = daily_backup_days(days, config.days_retention)
+    days_to_keep += weekly_backup_days(
+        days, config.dow, config.weeks_retention)
+    days_to_keep += monthly_backup_days(
+        days, config.dom, config.months_retention)
+    return days_to_keep
 
 
 def daily_backup_days(days, retention):
