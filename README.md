@@ -82,6 +82,12 @@ lapurge -d 7 /my/backupdir
 
 ## FAQ
 
+#### Do I have to use a specific naming convention for my backup files ?
+
+Nope ! lapurge use the **modification time** of your backup files to detect the backup date.
+
+ *(I may add an option in the future to choose between ctime and mtime.)*
+
 #### Each of my backups consists of several files. Is it a problem ?
 
 Nope ! All the files modified the same day are considered as a single backup.
@@ -92,4 +98,4 @@ Nope ! lapurge will keep the 7 most recent backups it will find.
 
 #### Did that rhino just ordered a drink ?
 
-Nope ! Chuck Testa.
+Nope ! [Chuck Testa](http://www.youtube.com/watch?v=35CkYtcaJzI).
