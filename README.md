@@ -3,6 +3,9 @@
 **lapurge** is a command line utility which helps you to purge your backup directories according to your retention rules, regardless of the backup tool you use.
 
 
+[![Build Status](https://secure.travis-ci.org/madmatah/lapurge.png)](http://travis-ci.org/madmatah/lapurge)
+
+
 ## Requirements
 
 - Python >= 2.7 and >= 3.2
