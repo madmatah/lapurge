@@ -15,10 +15,8 @@
 ## Installation
 
 ```
-sudo python setup.py install
+sudo pip install lapurge
 ```
-
-(I will submit the project to PyPI soon)
 
 
 ## Usage
